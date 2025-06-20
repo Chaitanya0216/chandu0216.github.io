@@ -2,13 +2,42 @@
 <html>
 <head>
   <title>Business Site</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #f4f4f4, #e2e2e2);
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #333;
+    }
+    .button-group {
+      margin-top: 40px;
+    }
+    button {
+      background-color: #0b5ed7;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #084298;
+    }
+  </style>
 </head>
 <body>
   <h1>Welcome to Our Business Site</h1>
-  
-  <button onclick="window.location.href='https://www.hikvision.com'">Hikvision Global</button>
-  <button onclick="window.location.href='https://www.hikvisionindia.com'">Hikvision India</button>
-  <button onclick="window.location.href='https://www.hikvision.com/en/products/'">Hikvision Products</button>
-  <button onclick="window.location.href='https://www.example.com'">Our Partner</button>
+  <div class="button-group">
+    <button onclick="window.location.href='https://www.hikvision.com'">Hikvision Global</button>
+    <button onclick="window.location.href='https://www.hikvisionindia.com'">Hikvision India</button>
+    <button onclick="window.location.href='https://www.hikvision.com/en/products/'">Hikvision Products</button>
+    <button onclick="window.location.href='https://example.com'">Our Partner</button>
+  </div>
 </body>
 </html>
