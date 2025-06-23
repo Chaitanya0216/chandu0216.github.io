@@ -4,62 +4,122 @@
   <title>BESTBELL</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #f4f4f4, #e2e2e2);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #e6f7f7, #cce0ff);
+      color: #00334d;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #006d77;
+      color: white;
+      padding: 30px 20px;
       text-align: center;
-      padding: 50px;
     }
-    h1 {
-      color: #333;
+
+    nav {
+      background-color: #00afb9;
+      padding: 15px 0;
+      text-align: center;
     }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 600;
+      font-size: 17px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    h1, h2 {
+      margin: 10px 0;
+    }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+
     .button-group {
-      margin-top: 40px;
+      margin: 30px auto 50px;
     }
+
     button {
-      background-color: #0b5ed7;
+      background-color: #0077b6;
       color: white;
       border: none;
-      padding: 15px 30px;
+      padding: 14px 28px;
       margin: 10px;
       font-size: 16px;
       cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
+      border-radius: 6px;
+      transition: background-color 0.3s;
     }
+
     button:hover {
-      background-color: #084298;
+      background-color: #005f87;
     }
-    nav {
-  margin-bottom: 30px;
-  font-size: 18px;
-  color: #0b5ed7;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
-}
-nav :hover {
-  text-decoration: underline;
-}
+
+    section {
+      margin-top: 60px;
+    }
+
+    footer {
+      background-color: #00334d;
+      color: #d9f0ff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 80px;
+    }
   </style>
 </head>
 <body>
-  <h1>BESTBELL</h1>
+
+  <header>
+    <h1>BESTBELL</h1>
+    <p>Your trusted partner in surveillance and secure access systems</p>
+  </header>
+
   <nav>
-  <a href="#about">About</a> | <a href="#contact">Contact</a>
-</nav>
-  <p>Your trusted partner in surveillance solutions and secure access systems. We bring technology and reliability together.</p>
-  <div class="button-group">
-    <button onclick="window.location.href='http://172.27.130.49/doc/page/login.asp?_1750481708374'">STS-1</button>
-    <button onclick="window.location.href='http://172.27.130.119/doc/page/login.asp?_1750481708374'">STS-2</button>
-    <button onclick="window.location.href='http://172.27.130.189/doc/page/login.asp?_1750481708374'">STS-3</button>
-    <button onclick="window.location.href='http://172.27.130.140:18080/'">COS-1</button>
-  </div>
-  <section style="margin-top: 50px;">
-  <h2>About Us</h2>
-  <p>We specialize in providing top-tier security camera systems, installation services, and after-sales support for commercial and residential needs. Our partnership with Hikvision ensures access to cutting-edge surveillance technology.</p>
-</section>
-  <footer style="margin-top: 60px; color: #888;">
-  © 2025 BESTBELL | All rights reserved.
-</footer>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <div class="button-group">
+      <button onclick="window.location.href='http://172.27.130.49/doc/page/login.asp?_1750481708374'">STS-1</button>
+      <button onclick="window.location.href='http://172.27.130.119/doc/page/login.asp?_1750481708374'">STS-2</button>
+      <button onclick="window.location.href='http://172.27.130.189/doc/page/login.asp?_1750481708374'">STS-3</button>
+      <button onclick="window.location.href='http://172.27.130.140:18080/'">COS-1</button>
+    </div>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>We specialize in delivering high-performance security camera systems, reliable installation services, and exceptional support for both residential and commercial needs. With our trusted partnership with Hikvision, you get cutting-edge surveillance backed by expert service.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>📞 +91 98765 43210<br>
+         📧 support@bestbell.com<br>
+         📍 Visakhapatnam, Andhra Pradesh</p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 BESTBELL | All rights reserved.
+  </footer>
+
 </body>
 </html>
