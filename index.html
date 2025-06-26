@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BESTBELL</title>
+  <title>Best Bell Enterprises</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -12,28 +13,56 @@
     }
 
     header {
-      background-color: #006d77;
+      background: linear-gradient(to right, #004d66, #007a99);
       color: white;
-      padding: 30px 20px;
+      padding: 40px 30px;
       text-align: center;
+      border-bottom: 5px solid #00d4d4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    header img {
+      max-height: 80px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    header h2 {
+      margin: 5px 0 0;
+      font-weight: 300;
+      font-size: 24px;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 16px;
     }
 
     nav {
-      background-color: #00afb9;
+      background-color: #006f8a;
       padding: 15px 0;
       text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     nav a {
-      color: white;
+      color: #f0faff;
       text-decoration: none;
-      margin: 0 20px;
+      margin: 0 25px;
       font-weight: 600;
       font-size: 17px;
+      transition: color 0.3s;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      color: #a8ffff;
     }
 
     main {
@@ -41,8 +70,8 @@
       text-align: center;
     }
 
-    h1, h2 {
-      margin: 10px 0;
+    h2 {
+      margin: 10px 0 20px;
     }
 
     p {
@@ -56,7 +85,7 @@
     }
 
     button {
-      background-color: #0077b6;
+      background-color: #006494;
       color: white;
       border: none;
       padding: 14px 28px;
@@ -64,22 +93,47 @@
       font-size: 16px;
       cursor: pointer;
       border-radius: 6px;
-      transition: background-color 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     button:hover {
-      background-color: #005f87;
+      background-color: #004d73;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
     section {
       margin-top: 60px;
     }
 
-    footer {
-      background-color: #00334d;
-      color: #d9f0ff;
-      text-align: center;
+    #services .card, #testimonials .card {
+      background: #ffffff;
+      border-radius: 10px;
       padding: 20px;
+      max-width: 280px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    #testimonials .card {
+      background: #f0f9ff;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    footer {
+      background-color: #002d3a;
+      color: #cceeff;
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 14px;
+      border-top: 3px solid #00d4d4;
       margin-top: 80px;
     }
   </style>
@@ -87,12 +141,18 @@
 <body>
 
   <header>
-    <h1>BESTBELL</h1>
-    <p>Your trusted partner in surveillance and secure access systems</p>
+    <img src="bestbell-logo.jpeg" alt="Best Bell Logo">
+    <div>
+      <h1>BEST BELL</h1>
+      <h2>ENTERPRISES</h2>
+      <p>Your trusted partner in surveillance and secure access systems</p>
+    </div>
   </header>
 
   <nav>
     <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </nav>
 
@@ -109,6 +169,38 @@
       <p>We specialize in delivering high-performance security camera systems, reliable installation services, and exceptional support for both residential and commercial needs. With our trusted partnership with Hikvision, you get cutting-edge surveillance backed by expert service.</p>
     </section>
 
+    <section id="services">
+      <h2>Our Services</h2>
+      <div class="card-container">
+        <div class="card">
+          <h3>Surveillance Setup</h3>
+          <p>High-definition CCTV solutions tailored to your space and budget.</p>
+        </div>
+        <div class="card">
+          <h3>Access Control</h3>
+          <p>Smart card & biometric access systems for home and office security.</p>
+        </div>
+        <div class="card">
+          <h3>Support & Maintenance</h3>
+          <p>24/7 technical support and maintenance contracts for all systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <h2>What Our Clients Say</h2>
+      <div class="card-container">
+        <div class="card">
+          <p>"Professional, prompt, and reliable! The installation team was fantastic."</p>
+          <strong>– S. Ramesh, Vizag</strong>
+        </div>
+        <div class="card">
+          <p>"Best Bell gave us peace of mind with their top-notch surveillance system."</p>
+          <strong>– Anita P., Gajuwaka</strong>
+        </div>
+      </div>
+    </section>
+
     <section id="contact">
       <h2>Contact</h2>
       <p>📞 +91 98765 43210<br>
@@ -118,7 +210,7 @@
   </main>
 
   <footer>
-    © 2025 BESTBELL | All rights reserved.
+    © 2025 BEST BELL ENTERPRISES | All rights reserved.
   </footer>
 
 </body>
