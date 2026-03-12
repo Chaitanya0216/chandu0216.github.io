@@ -3,257 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anti-Gravity | Performance Orbit</title>
+    <title>Anti-Gravity | Master Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-color: #030712;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --tick-glow: #10b981;
-            --cross-glow: #ef4444;
-            --streak-glow: #f59e0b;
-            --text-main: #f3f4f6;
+            --bg: #030712;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --accent: #10b981;
+            --warning: #ef4444;
+            --secondary: #6366f1;
+            --text: #f3f4f6;
+            --border: rgba(255, 255, 255, 0.08);
         }
 
         body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #030712 100%);
-            color: var(--text-main);
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
+            background: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                        var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
             margin: 0;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
-            transition: background 0.5s ease;
         }
 
-        h1 { font-weight: 300; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 5px; }
-        .subtitle { color: #94a3b8; margin-bottom: 40px; font-size: 0.8rem; letter-spacing: 2px; }
-
-        .grid {
+        /* --- MONTHLY INTELLIGENCE BAR --- */
+        .intel-bar {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             width: 100%;
-            max-width: 1200px;
-        }
-
-        /* Anti-Gravity Card Style */
-        .habit-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 1100px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
             border-radius: 24px;
             padding: 25px;
-            text-align: center;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
+            margin-bottom: 30px;
         }
 
-        .habit-card:hover {
-            transform: tanslateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        .stat-group h4 { margin: 0; font-size: 0.7rem; letter-spacing: 2px; color: #94a3b8; text-transform: uppercase; }
+        .stat-group p { margin: 10px 0 0; font-size: 1.8rem; font-weight: bold; font-family: monospace; }
+
+        /* --- BENTO GRID --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
         }
 
-        .streak-badge {
-            position: absolute; top: 15px; right: 15px;
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--streak-glow);
-            padding: 5px 12px; border-radius: 20px;
-            font-size: 0.7rem; font-weight: bold;
-            border: 1px solid rgba(245, 158, 11, 0.3);
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
+            transition: all 0.4s ease;
+            grid-column: span 12;
         }
 
-        /* Chart Section */
-        .chart-section { width: 100%; max-width: 500px; margin: 40px 0; }
-
-        /* Expense Section */
-        .expense-system { margin-top: 60px; width: 100%; max-width: 1100px; }
-        #total-balance { font-size: 3rem; margin: 10px 0; transition: all 0.3s ease; }
-        
-        .glass-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px; padding: 12px;
-            color: white; width: 90%; margin-bottom: 15px; outline: none;
+        @media (min-width: 768px) {
+            .card-half { grid-column: span 6; }
+            .card-third { grid-column: span 4; }
         }
 
-        .orb-container { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
-        .orb {
-            width: 45px; height: 45px; border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            color: white; cursor: pointer; transition: 0.3s;
-        }
-        .orb.tick:hover { background: var(--tick-glow); box-shadow: 0 0 15px var(--tick-glow); }
-        .orb.cross:hover { background: var(--cross-glow); box-shadow: 0 0 15px var(--cross-glow); }
-
-        .transaction-item {
-            background: rgba(255, 255, 255, 0.03);
-            margin-bottom: 8px; padding: 12px;
-            border-radius: 12px; display: flex; justify-content: space-between;
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Gravity Warning */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+        /* --- HABIT BUTTONS --- */
+        .habit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
         }
-        .gravity-warning { animation: shake 0.2s infinite; color: var(--cross-glow) !important; }
-        .warning-bg { background-color: #1a0505 !important; }
+
+        .btn-orb {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            color: white;
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-tick:hover { background: var(--accent); box-shadow: 0 0 15px var(--accent); }
+        .btn-cross:hover { background: var(--warning); box-shadow: 0 0 15px var(--warning); }
+
+        /* --- INPUTS --- */
+        input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 12px;
+            color: white;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .balance-glow { font-size: 2.5rem; text-align: center; margin: 15px 0; color: var(--accent); }
 
     </style>
 </head>
 <body>
 
-    <h1>Anti-Gravity</h1>
-    <div class="subtitle">DAILY PERFORMANCE ORBIT</div>
+    <h1 style="letter-spacing: 8px; font-weight: 200;">ANTI-GRAVITY</h1>
+    <p style="color: var(--secondary); margin-bottom: 40px;">V2.0 | PERFORMANCE ARCHITECTURE</p>
 
-    <div class="grid" id="habit-grid"></div>
-
-    <div class="chart-section habit-card">
-        <h3>Skill Trajectory</h3>
-        <canvas id="skillRadar"></canvas>
+    <div class="intel-bar">
+        <div class="stat-group">
+            <h4>Monthly Discipline</h4>
+            <p id="month-discipline">0%</p>
+        </div>
+        <div class="stat-group">
+            <h4>Monthly Outflow</h4>
+            <p id="month-expense">₹0</p>
+        </div>
+        <div class="stat-group">
+            <h4>Active Streaks</h4>
+            <p id="active-streaks">0</p>
+        </div>
     </div>
 
-    <div class="expense-system">
-        <div style="text-align: center;">
-            <p style="color: #94a3b8; font-size: 0.8rem;">Current Altitude (Balance)</p>
-            <h2 id="total-balance">₹0.00</h2>
-            <div style="margin-bottom: 20px;">
-                <label style="font-size: 0.7rem; color: #64748b;">MONTHLY LIMIT: </label>
-                <input type="number" id="budget-limit" value="5000" onchange="saveBudget()" 
-                       style="background: transparent; border:none; border-bottom: 1px solid #334155; color: var(--streak-glow); width: 60px; text-align: center;">
+    <div class="bento-grid">
+        
+        <div class="card card-half">
+            <h3 style="margin-top:0">Mission Log</h3>
+            <div id="habit-list"></div>
+        </div>
+
+        <div class="card card-half">
+            <h3 style="margin-top:0">Skill Trajectory</h3>
+            <canvas id="skillRadar" height="250"></canvas>
+        </div>
+
+        <div class="card card-third">
+            <h3 style="margin-top:0">Log Weight</h3>
+            <input type="text" id="exp-name" placeholder="Item Name">
+            <input type="number" id="exp-amount" placeholder="Amount (₹)">
+            <div style="display:flex; gap:10px;">
+                <button class="card" style="padding:10px; cursor:pointer;" onclick="addFin('expense')">Expense</button>
+                <button class="card" style="padding:10px; cursor:pointer; background: var(--accent); color:black;" onclick="addFin('income')">Income</button>
             </div>
         </div>
 
-        <div class="grid">
-            <div class="habit-card">
-                <h3>Log Transaction</h3>
-                <input type="text" id="exp-name" placeholder="Description" class="glass-input">
-                <input type="number" id="exp-amount" placeholder="Amount (₹)" class="glass-input">
-                <div class="orb-container">
-                    <button class="orb cross" onclick="addExpense('expense')">− Out</button>
-                    <button class="orb tick" onclick="addExpense('income')">+ In</button>
-                </div>
-            </div>
-            <div class="habit-card">
-                <h3>Recent Orbit</h3>
-                <div id="transaction-list" style="max-height: 200px; overflow-y: auto;"></div>
-            </div>
+        <div class="card card-third">
+            <h3 style="margin-top:0">Total Altitude</h3>
+            <div class="balance-glow" id="total-bal">₹0</div>
+            <p style="text-align:center; font-size:0.7rem; color:#64748b;">AUTO-STABILIZING SYSTEMS ACTIVE</p>
         </div>
+
+        <div class="card card-third">
+            <h3 style="margin-top:0">Recent Orbit</h3>
+            <div id="history-list" style="max-height:150px; overflow-y:auto; font-size:0.8rem;"></div>
+        </div>
+
     </div>
 
     <script>
-        // --- HABIT LOGIC ---
-        const habitNames = ["Wake up time", "Morning Workout", "Deep Work Session", "Project Work", "Cold Shower", "No Porn", "Skills Upgradation"];
-        let habitData = JSON.parse(localStorage.getItem('ag_habit_streaks')) || {};
+        // DATA STORAGE
+        let habits = JSON.parse(localStorage.getItem('ag_v2_habits')) || [
+            {name: "Wake up time", streak: 0},
+            {name: "Morning Workout", streak: 0},
+            {name: "Deep Work", streak: 0},
+            {name: "Project Work", streak: 0},
+            {name: "Cold Shower", streak: 0},
+            {name: "No Porn", streak: 0},
+            {name: "Skills Upgradation", streak: 0}
+        ];
+        let transactions = JSON.parse(localStorage.getItem('ag_v2_fin')) || [];
 
-        function renderHabits() {
-            const grid = document.getElementById('habit-grid');
-            grid.innerHTML = '';
-            const today = new Date().toISOString().split('T')[0];
-
-            habitNames.forEach(name => {
-                const id = name.replace(/\s+/g, '-').toLowerCase();
-                if (!habitData[id]) habitData[id] = { streak: 0, lastDate: '', status: 'pending' };
-                const data = habitData[id];
-
-                const card = document.createElement('div');
-                card.className = `habit-card ${data.status === 'success' ? 'card-success' : data.status === 'fail' ? 'card-fail' : ''}`;
-                card.innerHTML = `
-                    <div class="streak-badge">🔥 ${data.streak}</div>
-                    <h3>${name}</h3>
-                    <div class="orb-container">
-                        <button class="orb cross" onclick="updateHabit('${id}', 'fail')">✕</button>
-                        <button class="orb tick" onclick="updateHabit('${id}', 'success')">✓</button>
+        // RE-RENDER FUNCTIONS
+        function renderAll() {
+            // Render Habits
+            const hList = document.getElementById('habit-list');
+            hList.innerHTML = '';
+            let totalStreaks = 0;
+            habits.forEach((h, i) => {
+                totalStreaks += h.streak;
+                hList.innerHTML += `
+                    <div class="habit-item">
+                        <span>${h.name} <small style="color:var(--secondary)">🔥${h.streak}</small></span>
+                        <div>
+                            <button class="btn-orb btn-cross" onclick="updateHabit(${i}, false)">✕</button>
+                            <button class="btn-orb btn-tick" onclick="updateHabit(${i}, true)">✓</button>
+                        </div>
                     </div>`;
-                grid.appendChild(card);
             });
+
+            // Render Finances
+            const fList = document.getElementById('history-list');
+            const balDisp = document.getElementById('total-bal');
+            fList.innerHTML = '';
+            let bal = 0; let mExp = 0;
+            transactions.forEach(t => {
+                const isExp = t.type === 'expense';
+                bal += isExp ? -t.amount : t.amount;
+                if(isExp) mExp += t.amount;
+                fList.innerHTML += `<div style="margin-bottom:5px; border-left:2px solid ${isExp?'red':'green'}; padding-left:10px;">${t.name} - ₹${t.amount}</div>`;
+            });
+            balDisp.innerText = `₹${bal.toLocaleString()}`;
+
+            // Update Intelligence Bar
+            document.getElementById('month-expense').innerText = `₹${mExp.toLocaleString()}`;
+            document.getElementById('active-streaks').innerText = totalStreaks;
+            document.getElementById('month-discipline').innerText = Math.min(totalStreaks * 2, 100) + "%";
+
+            localStorage.setItem('ag_v2_habits', JSON.stringify(habits));
+            localStorage.setItem('ag_v2_fin', JSON.stringify(transactions));
         }
 
-        window.updateHabit = function(id, status) {
-            const today = new Date().toISOString().split('T')[0];
-            if (status === 'success' && habitData[id].status !== 'success') habitData[id].streak++;
-            habitData[id].status = status;
-            habitData[id].lastDate = today;
-            localStorage.setItem('ag_habit_streaks', JSON.stringify(habitData));
-            renderHabits();
-        };
+        function updateHabit(index, success) {
+            if(success) habits[index].streak++;
+            else habits[index].streak = 0;
+            renderAll();
+        }
 
-        // --- EXPENSE LOGIC ---
-        let finances = JSON.parse(localStorage.getItem('ag_finances')) || [];
-        let monthlyLimit = localStorage.getItem('ag_budget_limit') || 5000;
-
-        function addExpense(type) {
+        function addFin(type) {
             const name = document.getElementById('exp-name').value;
             const amount = parseFloat(document.getElementById('exp-amount').value);
-            if (!name || !amount) return;
-            finances.unshift({ name, amount, type, date: new Date().toISOString() });
-            localStorage.setItem('ag_finances', JSON.stringify(finances));
+            if(!name || !amount) return;
+            transactions.unshift({name, amount, type, date: new Date()});
             document.getElementById('exp-name').value = '';
             document.getElementById('exp-amount').value = '';
-            renderFinances();
+            renderAll();
         }
 
-        function saveBudget() {
-            monthlyLimit = document.getElementById('budget-limit').value;
-            localStorage.setItem('ag_budget_limit', monthlyLimit);
-            renderFinances();
-        }
+        // INIT RADAR CHART
+        const ctx = document.getElementById('skillRadar').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Networking', 'Coding', 'Design', 'Systems', 'Focus'],
+                datasets: [{
+                    label: 'Capability',
+                    data: [80, 90, 70, 85, 95],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                }]
+            },
+            options: { scales: { r: { ticks: {display: false}, grid: {color: 'rgba(255,255,255,0.05)'}, angleLines: {color: 'rgba(255,255,255,0.05)'} } }, plugins: {legend: {display: false}} }
+        });
 
-        function renderFinances() {
-            const list = document.getElementById('transaction-list');
-            const balanceDisplay = document.getElementById('total-balance');
-            list.innerHTML = '';
-            let total = 0; let totalExp = 0;
-
-            finances.forEach(item => {
-                const isInc = item.type === 'income';
-                total += isInc ? item.amount : -item.amount;
-                if(!isInc) totalExp += item.amount;
-                list.innerHTML += `<div class="transaction-item" style="border-left: 3px solid ${isInc ? '#10b981' : '#ef4444'}">
-                    <span>${item.name}</span><span>${isInc ? '+' : '-'}${item.amount}</span></div>`;
-            });
-
-            balanceDisplay.innerText = `₹${total.toFixed(2)}`;
-            if (totalExp > monthlyLimit) {
-                balanceDisplay.classList.add('gravity-warning');
-                document.body.classList.add('warning-bg');
-            } else {
-                balanceDisplay.classList.remove('gravity-warning');
-                document.body.classList.remove('warning-bg');
-            }
-        }
-
-        // --- CHART LOGIC ---
-        function initChart() {
-            const ctx = document.getElementById('skillRadar').getContext('2d');
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Networking', 'Python', 'Web Dev', 'Database', 'Soft Skills', 'Systems'],
-                    datasets: [{
-                        label: 'Orbit',
-                        data: [80, 75, 90, 60, 70, 85],
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        borderColor: '#10b981',
-                        pointBackgroundColor: '#10b981'
-                    }]
-                },
-                options: { 
-                    scales: { r: { grid: { color: 'rgba(255,255,255,0.05)' }, angleLines: { color: 'rgba(255,255,255,0.05)' }, ticks: { display: false } } },
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
-
-        renderHabits();
-        renderFinances();
-        initChart();
+        renderAll();
     </script>
 </body>
 </html>
